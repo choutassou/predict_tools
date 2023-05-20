@@ -1,8 +1,11 @@
+# This module can get data from a chart graph
+
 import sys
 import csv
 from PIL import Image
 
 
+# judge data point (red)
 def is_red(px):
     fr = float(px[0])
     fg = float(px[1])
@@ -10,14 +13,17 @@ def is_red(px):
     return fr / (fg + 1) > 2.0 and fr / (fb + 1) > 2.0
 
 
+# pixel cordinate to data value
 def getY(h, py, u):
     return float(h - 1 - py) / u
 
 
+# data value to pixel cordinate
 def getPY(h, y, u):
     return h - 1 - int(y * u)
 
 
+# main
 image_file = sys.argv[1]
 x_start = int(sys.argv[2])  # int, hours from xxx
 y_start = float(sys.argv[3])  # float, under bound of value
@@ -30,14 +36,15 @@ img_width, img_height = img.size
 # 軸の単位長を計算、Xは整数、YはFloat
 x_unit = img_width / width
 y_unit = float(img_height) / height
-print(x_unit, y_unit)
+print(f"pixel number per unit x={x_unit} y={y_unit}")
+
 # データポイントを記録するリストを初期化
 data_points = []
 last_y = 0.0
 x = 0
 y = None
 
-# 一番右のy値を取得
+# 一番左のy値を取得
 for py in range(img_height - 1, 0, -1):
     px_info = img.getpixel((0, py))
     if is_red(px_info):
@@ -45,9 +52,9 @@ for py in range(img_height - 1, 0, -1):
         data_points.append((x_start, y + y_start))
         break
 if y is None:
+    print("error: left edge of the image must has a data. (red point)")
     exit()
 
-print(y)
 x = 1
 # x軸方向にループ
 while True:
