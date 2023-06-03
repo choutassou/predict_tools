@@ -4,5 +4,6 @@
     "max": 92.75,
     "last_time":"2023-06-01 23:00",
     "last_no":1781,
+    "data_file":"C:\\predict_tools\\DATA\\imageTodata\\aud\\aud.csv",
     "comment":"only working date could be used in this file"
 }

@@ -5,7 +5,9 @@
   else the program will be very difficult (in function count_days and count_hours).
 
 2. program to get data from chat
-python C:\predict_tools\chartToCordinate\chart_2_data.py C:\predict_tools\DATA\imageTodata\aud\18.png C:\predict_tools\DATA\imageTodata\aud\aud.json C:\predict_tools\DATA\imageTodata\aud\aud.csv
+python C:\predict_tools\chartToCordinate\chart_2_data.py ^
+ C:\predict_tools\DATA\imageTodata\aud\18.png ^
+ C:\predict_tools\DATA\imageTodata\aud\aud.json
 
 3. program to predict
 python C:\predict_tools\predict\predict_main.py C:\predict_tools\DATA\imageTodata\aud\aud.csv

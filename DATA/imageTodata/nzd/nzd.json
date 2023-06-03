@@ -1,0 +1,7 @@
+{
+    "to_time":"2023-06-05 06:00",
+    "min": 81.0,
+    "max": 88.5,
+    "data_file":"C:\\predict_tools\\DATA\\imageTodata\\nzd\\nzd.csv",
+    "comment":"only working date could be used in this file"
+}

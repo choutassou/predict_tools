@@ -6,6 +6,3 @@ python C:\Dev\chartToCordinate\chart_2_data.py C:\predict_tools\DATA\imageTodata
 2023/5/12
 
 python C:\predict_tools\predict\predict_main.py C:\predict_tools\DATA\imageTodata\aud_daily\aud_daily.csv
-
-
-

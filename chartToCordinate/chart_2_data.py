@@ -32,16 +32,21 @@ except_date = ["2023-01-01", "2022-12-31"]
 
 image_file = sys.argv[1]
 conf_file = sys.argv[2]
-csv_file_path = sys.argv[3]
 
+# get settings from json
 with open(conf_file, "r") as f:
     settings = json.load(f)
 
-x_start = settings.get("last_no") + 1
+# get last data_no and timestamp from csv file.
+last_row = [0, 0, ""]
+with open(settings.get("data_file"), "r") as csv_file:
+    reader = csv.reader(csv_file)
+    for row in reader:
+        last_row = row
+
+x_start = int(last_row[0]) + 1
 y_start = settings.get("min")
-start_dt = datetime.strptime(settings.get("last_time"), "%Y-%m-%d %H:%M") + timedelta(
-    hours=1
-)
+start_dt = datetime.strptime(last_row[2], "%Y-%m-%d %H:%M") + timedelta(hours=1)
 end_dt = datetime.strptime(settings.get("to_time"), "%Y-%m-%d %H:%M")
 
 print(f"x,y={x_start},{y_start}, dt={start_dt},{end_dt}")
@@ -103,7 +108,7 @@ while True:
     data_points.append((x + x_start, y + y_start))
     x = x + 1
 
-with open(csv_file_path, "a", newline="\n") as csv_file:
+with open(settings.get("data_file"), "a", newline="\n") as csv_file:
     csv_writer = csv.writer(csv_file)
     for x, y in data_points:
-        csv_writer.writerow([x, y])
+        csv_writer.writerow([x, y, ""])
