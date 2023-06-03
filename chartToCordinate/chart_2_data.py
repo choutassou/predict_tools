@@ -2,6 +2,10 @@
 
 import sys
 import csv
+import json
+from datetime import datetime, timedelta
+from time_calc.date_span import count_hours
+
 from PIL import Image
 
 
@@ -24,11 +28,25 @@ def getPY(h, y, u):
 
 
 # main
+except_date = ["2023-01-01", "2022-12-31"]
+
 image_file = sys.argv[1]
-x_start = int(sys.argv[2])  # int, hours from xxx
-y_start = float(sys.argv[3])  # float, under bound of value
-width = int(sys.argv[4])  # int, hours in the chart
-height = float(sys.argv[5])  # float, top bound of value
+conf_file = sys.argv[2]
+csv_file_path = sys.argv[3]
+
+with open(conf_file, "r") as f:
+    settings = json.load(f)
+
+x_start = settings.get("last_no") + 1
+y_start = settings.get("min")
+start_dt = datetime.strptime(settings.get("last_time"), "%Y-%m-%d %H:%M") + timedelta(
+    hours=1
+)
+end_dt = datetime.strptime(settings.get("to_time"), "%Y-%m-%d %H:%M")
+
+print(f"x,y={x_start},{y_start}, dt={start_dt},{end_dt}")
+width = count_hours(start_dt, end_dt, except_date)
+height = float(settings.get("max") - settings.get("min"))
 
 img = Image.open(image_file)
 img_width, img_height = img.size
@@ -85,10 +103,7 @@ while True:
     data_points.append((x + x_start, y + y_start))
     x = x + 1
 
-csv_file_path = image_file.replace("png", "csv")
-
-with open(csv_file_path, "w", newline="\n") as csv_file:
+with open(csv_file_path, "a", newline="\n") as csv_file:
     csv_writer = csv.writer(csv_file)
-    csv_writer.writerow(["x", "y"])
     for x, y in data_points:
         csv_writer.writerow([x, y])

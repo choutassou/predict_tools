@@ -1,11 +1,15 @@
-毎回、朝の半時間と土日の停止を時間数から減らす
+1. unvailabe time
+     saturday 6:00 ~ monday 6:00
+     holiday 6:00 ~ next day 6:00
+  should not use these time in aud.json.
+  else the program will be very difficult (in function count_days and count_hours).
 
-89.7 91.2 5/11 1:00 5/12 23:00
-python C:\Dev\chartToCordinate\chart_2_data.py C:\predict_tools\DATA\imageTodata\aud\15.png 1409 89.7 46 1.5
-1456 5/12 0:00
+2. program to get data from chat
+python C:\predict_tools\chartToCordinate\chart_2_data.py C:\predict_tools\DATA\imageTodata\aud\18.png C:\predict_tools\DATA\imageTodata\aud\aud.json C:\predict_tools\DATA\imageTodata\aud\aud.csv
 
-python C:\Dev\chartToCordinate\chart_2_data.py C:\predict_tools\DATA\imageTodata\aud\16.png 1457 90 18 1.25
-1476 5/15 22:00
-
-23 x 4 + 14
+3. program to predict
 python C:\predict_tools\predict\predict_main.py C:\predict_tools\DATA\imageTodata\aud\aud.csv
+
+4. next task
+   should automatically get last number and last time from aud.csv
+   
