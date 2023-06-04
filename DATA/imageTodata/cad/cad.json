@@ -1,0 +1,7 @@
+{
+    "to_time":"2023-06-05 06:00",
+    "min": 99.0,
+    "max": 105.0,
+    "data_file":"C:\\predict_tools\\DATA\\imageTodata\\cad\\cad.csv",
+    "comment":"only working date could be used in this file"
+}

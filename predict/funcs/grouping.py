@@ -2,6 +2,24 @@ import random
 import numpy as np
 
 
+def mean_within_3sigma(array_a):
+    """
+    Args:
+      array_a: 配列A
+
+    Returns:
+      3δ以内の値の算術平均値
+    """
+    # 平均値と標準偏差を計算
+    mean = np.mean(array_a)
+    std = np.std(array_a)
+    # 3δ外の値を除外
+    filtered_values = [x for x in array_a if abs(x - mean) <= 3 * std]
+    # 3δ以内の値の算術平均を計算
+    mean_filtered = np.mean(filtered_values)
+    return mean_filtered
+
+
 def grouping(xa, group_size):
     # xaとarrayYのサイズを取得
     data_size = len(xa)

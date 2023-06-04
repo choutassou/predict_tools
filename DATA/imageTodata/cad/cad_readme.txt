@@ -1,6 +1,17 @@
-99.4 100.8
-python C:\Dev\chartToCordinate\chart_2_data.py C:\predict_tools\DATA\imageTodata\cad\05.png 625 99.4 21 1.4
-645 5/11 22:00
+1. unvailabe time
+     saturday 6:00 ~ monday 6:00
+     holiday 6:00 ~ next day 6:00
+  should not use these time in cad.json.
+  else the program will be very difficult (in function count_days and count_hours).
 
+2. program to get data from chat
+python C:\predict_tools\chartToCordinate\chart_2_data.py ^
+ C:\predict_tools\DATA\imageTodata\cad\01.png ^
+ C:\predict_tools\DATA\imageTodata\cad\cad.json
 
+3. program to predict
 python C:\predict_tools\predict\predict_main.py C:\predict_tools\DATA\imageTodata\cad\cad.csv
+
+4. automatically get last number and last time from data file
+
+5. ***MANUALY*** should add ",yyyy-mm-dd hh:mi" to the last row of data file every time.
