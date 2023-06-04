@@ -4,7 +4,7 @@ import sys
 import csv
 import json
 from datetime import datetime, timedelta
-from time_calc.date_span import count_hours
+from time_calc.date_span import count_hours, count_days
 
 from PIL import Image
 
@@ -32,6 +32,7 @@ except_date = ["2023-01-01", "2022-12-31"]
 
 image_file = sys.argv[1]
 conf_file = sys.argv[2]
+daily_flg = False
 
 # get settings from json
 with open(conf_file, "r") as f:
@@ -46,11 +47,19 @@ with open(settings.get("data_file"), "r") as csv_file:
 
 x_start = int(last_row[0]) + 1
 y_start = settings.get("min")
-start_dt = datetime.strptime(last_row[2], "%Y-%m-%d %H:%M") + timedelta(hours=1)
+start_dt = datetime.strptime(last_row[2], "%Y-%m-%d %H:%M")
 end_dt = datetime.strptime(settings.get("to_time"), "%Y-%m-%d %H:%M")
 
-print(f"x,y={x_start},{y_start}, dt={start_dt},{end_dt}")
-width = count_hours(start_dt, end_dt, except_date)
+width = 1
+if settings.get("daily") == True:
+    start_dt = start_dt + timedelta(days=1)
+    width = count_days(start_dt, end_dt, except_date)
+else:
+    start_dt = start_dt + timedelta(hours=1)
+    width = count_hours(start_dt, end_dt, except_date)
+print(f"x,y={x_start},{y_start}, dt={start_dt},{end_dt}, width={width}")
+
+
 height = float(settings.get("max") - settings.get("min"))
 
 img = Image.open(image_file)
@@ -83,8 +92,14 @@ x = 1
 while True:
     step = 0
     px = x * x_unit
-    if px >= img_width:
+    # right edge, it will not be so accurate, so give it a range
+    if abs(px - img_width) < 2:
+        # to avoid a px out of bound
+        px = img_width - 1
+    if px - img_width > 2:
         break
+        # to end the loop
+
     # y軸方向にループの起点
     py = getPY(img_height, y, y_unit)
     py_up = py

@@ -1,0 +1,8 @@
+{
+    "to_time":"2023-06-05 07:00",
+    "min": 90.0,
+    "max": 93.0,
+    "data_file":"C:\\predict_tools\\DATA\\imageTodata\\aud_daily\\aud_daily.csv",
+    "daily": true,
+    "comment":"only working date could be used in this file"
+}
