@@ -9,7 +9,8 @@ parser.add_argument("csv_file", type=str, help="the input CSV file")
 args = parser.parse_args()
 
 # [group_size,power]の2次元配列
-group_size_list = [20, 25, 30, 35, 40, 55, 60, 65, 70]
+group_size_list = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
+# group_size_list = [20, 25, 30, 35, 40]
 power_list = [1, 2, 3]
 
 # CSVファイルからデータを読み込み、x座標とy座標のリストを生成
@@ -26,9 +27,10 @@ for grp_size in group_size_list:
     for power in power_list:
         # to 1 set of (m,p), get average of 10 times
         abs_dvs = []
-        for i in range(10):
+        for i in range(3):
             abs_dvs.append(groupx.get_deviation_grp(x_data, y_data, grp_size, power))
         abs_dv = groupx.mean_within_3sigma(abs_dvs)
+        print(f"abs_dv={abs_dv},{grp_size},{power}")
 
         # search minimum deviation in 27 kind of
         if min_abs_dv > abs_dv:

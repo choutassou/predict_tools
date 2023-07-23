@@ -18,6 +18,7 @@ def mean_within_3sigma(array_a):
     # 3δ以内の値の算術平均を計算
     mean_filtered = np.mean(filtered_values)
     return mean_filtered
+    # return mean
 
 
 def grouping(xa, group_size):

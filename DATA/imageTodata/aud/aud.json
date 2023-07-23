@@ -1,9 +1,8 @@
 {
-    "to_time":"2023-06-05 06:00",
-    "min": 91.0,
-    "max": 92.75,
-    "last_time":"2023-06-01 23:00",
-    "last_no":1781,
+    "to_time":"2023-06-07 20:00",
+    "min": 92.85,
+    "max": 93.45,
+    "daily": false,
     "data_file":"C:\\predict_tools\\DATA\\imageTodata\\aud\\aud.csv",
     "comment":"only working date could be used in this file"
 }

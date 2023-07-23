@@ -5,8 +5,8 @@ python C:\predict_tools\chartToCordinate\chart_2_data.py C:\predict_tools\DATA\i
 
 3. program to predict
 python C:\predict_tools\predict\predict_main.py C:\predict_tools\DATA\imageTodata\aud_daily\aud_daily.csv
-m_b=25, p_b=2
-next_y=91.37292008303884, delta=-0.011720998244753594
+m_b=20, p_b=1
+next_y=91.80665084409138, delta=-0.008567485484974244
 
 4. automatically get last number and last time from data file
 
