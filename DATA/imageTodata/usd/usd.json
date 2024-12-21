@@ -1,0 +1,7 @@
+{
+    "to_time":"2024-12-18 21:00",
+    "min": 153.15,
+    "max": 153.9,
+    "data_file":"C:\\LOC\\develop\\GITHUB\\predict_tools\\DATA\\imageTodata\\usd\\usd.csv",
+    "comment":"only working date could be used in this file"
+}

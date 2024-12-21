@@ -33,8 +33,10 @@ def grouping(xa, group_size):
     # 抽出されたグループを格納するリスト
     groups = []
 
+    # グループ数が指定された数になるまで繰り返す
+    # ランダムにグループの起点を決定    
     while len(groups) < num_groups:
-        # ランダムに起点を決定
+        # グループの起点がmin_distanceより大きいことを確保する
         random_x = random.randint(0, data_size - group_size)
         find = False
         for xx in groups:
@@ -50,6 +52,7 @@ def grouping(xa, group_size):
 
 
 def get_deviation_grp(xa, ya, group_size, power):
+    # randomly get some groups from x coordinate
     grps = grouping(xa, group_size)
 
     deviation_grp = 0
@@ -63,13 +66,8 @@ def get_deviation_grp(xa, ya, group_size, power):
             yg.append(ya[group_start_x + i])
         # get fitted coefficient
         coefficients = np.polyfit(xg, yg, power)
-
-        # caculate fitted value
-        y_fit = 0
-        lastx = group_size - 1
-        for coe in coefficients:
-            y_fit = y_fit * lastx + coe
-
+        # caculate fitted value of last value in group
+        y_fit = get_fit_value(group_size - 1, coefficients)
         # deviation of last vlaue in group
         deviation = abs(y_fit - yg[-1])
         deviation_grp = deviation_grp + deviation
@@ -77,18 +75,22 @@ def get_deviation_grp(xa, ya, group_size, power):
     deviation_grp = deviation_grp / len(grps)
     return deviation_grp
 
+# for example, power = 3
+# polyfit returns coe[0], coe[1], coe[2], coe[3]
+# then, next_y = coe[0]*next_x^3 + coe[1]*next_x^2 + coe[2]*next_x + coe[3]
+def get_fit_value(x, coe):
+    # caculate fitted value
+    y_fit = 0
+    for coe in coe:
+        y_fit = y_fit * x + coe
+    return y_fit
 
 def get_next_value(xa, ya, power):
     # get fitted coefficient
-
     coefficients = np.polyfit(xa, ya, power)
 
     # caculate fitted value
-    y_fit = 0
-
-    for coe in coefficients:
-        y_fit = y_fit * (xa[-1] + 1) + coe
-
+    y_fit = get_fit_value(xa[-1] + 1, coefficients)
     return y_fit
 
 

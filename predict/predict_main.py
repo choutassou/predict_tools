@@ -9,9 +9,9 @@ parser.add_argument("csv_file", type=str, help="the input CSV file")
 args = parser.parse_args()
 
 # [group_size,power]の2次元配列
-group_size_list = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
-# group_size_list = [20, 25, 30, 35, 40]
-power_list = [1, 2, 3]
+#group_size_list = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
+group_size_list = [20, 25, 30, 35, 40]
+power_list = [2, 3, 4]
 
 # CSVファイルからデータを読み込み、x座標とy座標のリストを生成
 df = pd.read_csv(args.csv_file, header=None)
@@ -22,7 +22,7 @@ min_abs_dv = 100000000
 grp_size_memo = 20
 power_memo = 2
 
-# search best (m,p) for minimum deviation.
+# search best (m,p), best means it has minimum deviation.
 for grp_size in group_size_list:
     for power in power_list:
         # to 1 set of (m,p), get average of 10 times
